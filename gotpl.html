@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gotpl - Уютный Minecraft сервер</title>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --dark-primary: #388E3C;
+            --secondary: #8BC34A;
+            --accent: #FFC107;
+            --dark: #212121;
+            --light: #F5F5F5;
+        }
+        
+        body {
+            font-family: 'Minecraft', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--light);
+            background: 
+                linear-gradient(to bottom, rgba(22, 44, 22, 0.85), rgba(5, 15, 5, 0.85)),
+                url('https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-background-creepers-v2.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            min-height: 100vh;
+        }
+        
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        }
+        
+        header {
+            background-color: rgba(33, 33, 33, 0.9);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
+            backdrop-filter: blur(5px);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: var(--accent);
+            text-shadow: 3px 3px 0 var(--primary);
+            margin: 0;
+        }
+        
+        .server-ip {
+            background-color: var(--primary);
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .server-ip:hover {
+            background-color: var(--dark-primary);
+            transform: scale(1.05);
+        }
+        
+        nav {
+            background-color: rgba(33, 33, 33, 0.8);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            backdrop-filter: blur(3px);
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: var(--primary);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .section {
+            background-color: rgba(33, 33, 33, 0.8);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent);
+            backdrop-filter: blur(3px);
+        }
+        
+        h2 {
+            color: var(--accent);
+            margin-top: 0;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .feature-card {
+            background-color: rgba(139, 195, 74, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--primary);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .feature-card h3 {
+            color: var(--secondary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark-primary);
+            transform: scale(1.05);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+        
+        .btn-accent:hover {
+            background-color: #FFA000;
+        }
+        
+        .players-online {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: rgba(33, 33, 33, 0.9);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 4px solid var(--accent);
+            backdrop-filter: blur(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+        }
+        
+        .plugin-list {
+            columns: 2;
+            column-gap: 2rem;
+        }
+        
+        .plugin-list li {
+            margin-bottom: 0.5rem;
+            break-inside: avoid;
+        }
+        
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .plugin-list {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="logo">GOTPL</h1>
+        <p>Уютный ванильный сервер с плагинами</p>
+        <div class="server-ip" id="server-ip">gotpl.hopto.org</div>
+        <div class="players-online">Сейчас онлайн: <span id="online-count">?</span> игроков</div>
+    </header>
+    
+    <nav>
+        <a href="#about">О сервере</a>
+        <a href="#features">Особенности</a>
+        <a href="#plugins">Плагины</a>
+        <a href="#rules">Правила</a>
+        <a href="#staff">Администрация</a>
+    </nav>
+    
+    <div class="container">
+        <section id="about" class="section">
+            <h2>О сервере Gotpl</h2>
+            <p>Добро пожаловать на Gotpl - уютный Minecraft сервер с плагинами для комфортной игры! Мы предлагаем ванильный геймплей с небольшими улучшениями.</p>
+            <p>Наш сервер - это место для спокойной игры без излишнего грифа и читеров. Присоединяйтесь к нашему маленькому, но дружному сообществу!</p>
+            <a href="#join" class="btn btn-accent">Как подключиться</a>
+        </section>
+        
+        <section id="features" class="section">
+            <h2>Особенности сервера</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🛡️ Защита</h3>
+                    <p>Надежная система защиты от гриферов и читеров</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🏠 Уют</h3>
+                    <p>Дружелюбное комьюнити без токсичности</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚙️ Оптимизация</h3>
+                    <p>Хорошая производительность даже на слабых ПК</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📜 Простые правила</h3>
+                    <p>Минимум ограничений, максимум свободы</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔄 Регулярные бэкапы</h3>
+                    <p>Ваши постройки в безопасности</p>
+                </div>
+                <div class="feature-card">
+                    <h3>👨‍💻 Поддержка</h3>
+                    <p>Администрация всегда готова помочь</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="plugins" class="section">
+            <h2>Основные плагины</h2>
+            <ul class="plugin-list">
+                <li><strong>EssentialsX</strong> - основные команды</li>
+                <li><strong>WorldGuard</strong> - защита территорий</li>
+                <li><strong>CoreProtect</strong> - откат разрушений</li>
+                <li><strong>LuckPerms</strong> - система прав</li>
+                <li><strong>GriefPrevention</strong> - защита от гриферов</li>
+                <li><strong>Dynmap</strong> - карта сервера</li>
+                <li><strong>SimpleTP</strong> - телепортация</li>
+                <li><strong>ClearLag</strong> - очистка мусора</li>
+            </ul>
+            <p>Только необходимые плагины для комфортной игры без перегрузки сервера.</p>
+        </section>
+        
+        <section id="join" class="section">
+            <h2>Как присоединиться</h2>
+            <ol>
+                <li>Запустите Minecraft <strong>версии 1.20.1</strong></li>
+                <li>Перейдите в раздел "Сетевая игра"</li>
+                <li>Нажмите "Добавить сервер"</li>
+                <li>Введите адрес: <strong>gotpl.hopto.org</strong></li>
+                <li>Сохраните и присоединяйтесь!</li>
+            </ol>
+            <div style="margin-top: 1rem;">
+                <a href="https://t.me/Gotpl" class="btn btn-accent" target="_blank"><i class="fab fa-telegram"></i> Наш Telegram</a>
+            </div>
+        </section>
+        
+        <section id="rules" class="section">
+            <h2>Основные правила</h2>
+            <ol>
+                <li>Запрещено использование читов и багов</li>
+                <li>Не гриферить и не мешать другим игрокам</li>
+                <li>Уважительное отношение ко всем</li>
+                <li>Запрещена реклама других серверов</li>
+                <li>Слушаться указаний администрации</li>
+            </ol>
+            <p>Полные правила доступны командой <strong>/rules</strong> в игре.</p>
+        </section>
+        
+        <section id="staff" class="section">
+            <h2>Администрация сервера</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Gotpl</h3>
+                    <p>Владелец сервера</p>
+                    <p>Контакты: <a href="https://t.me/Gotpl" target="_blank" style="color: var(--accent);">@Gotpl</a></p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="social-links">
+            <a href="https://t.me/Gotpl" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+        </div>
+        <p>© 2023 Gotpl Minecraft Server. Все права защищены.</p>
+        <p>Minecraft является товарным знаком Mojang Studios. Неофициальный сервер.</p>
+    </footer>
+    
+    <script>
+        // Копирование IP сервера
+        document.getElementById('server-ip').addEventListener('click', function() {
+            const ip = this.textContent;
+            navigator.clipboard.writeText(ip).then(() => {
+                const originalText = this.textContent;
+                this.textContent = 'IP скопирован!';
+                setTimeout(() => {
+                    this.textContent = originalText;
+                }, 2000);
+            });
+        });
+        
+        // Получение информации о сервере (примерная реализация)
+        async function updateServerInfo() {
+            try {
+                // В реальности нужно подключить API вашего сервера
+                document.getElementById('online-count').textContent = '?';
+            } catch (e) {
+                console.log('Не удалось получить данные сервера');
+            }
+        }
+        
+        // Обновляем каждые 2 минуты
+        setInterval(updateServerInfo, 120000);
+        updateServerInfo(); // Первоначальный запрос
+    </script>
+    
+    <!-- Иконки Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</body>
+</html>
